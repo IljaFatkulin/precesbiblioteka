@@ -1,37 +1,21 @@
-const POP_UP = document.getElementById('popUp');
-let Preces = [];
+function add() {
+	var name = document.getElementById('nosaukums').value;
+	var value = document.getElementById('cena').value;
 
-window.addEventListener('load', () => {
-    Preces = JSON.parse(localStorage.getItem("Preces") || "[]");
-    console.log(Preces)
-    render();
-});
-
-document.getElementById('jaunaprece').addEventListener('click', () => {
-
-    let prece = {nosaukums: nosaukums.value, cena: cena.value};
-
-    nosaukums.value = "";
-    cena.value = "";
-
-    Preces.push(prece);
-
-    render();
-})
-
-function render() {
-    let biblioteka = document.getElementById('biblioteka');
-    biblioteka.innerHTML = "";
-
-    for(let i = 0; i < Preces.length; i++) {
-        let prece = `
-        <div class="prece">
-            <h3>Nosaukums: ${Preces[i].nosaukums}</h3>
-            <h4>Cena: ${Preces[i].cena}</h4>
-        </div>`;
-
-        biblioteka.innerHTML += prece;
-    }
-
-    localStorage.setItem("Preces", JSON.stringify(Preces))
+	var prece = document.createElement("LI");
+	var name = document.createTextNode("Nosaukums: " + name);
+	var price = document.createTextNode("Cena: " + value);
+	
+	prece.appendChild(name);
+	prece.appendChild(document.createElement("BR"));
+	prece.appendChild(price);
+	var button = document.createElement("BUTTON")
+	button.innerHTML = "Dzēst"; 
+	prece.appendChild(document.createElement("BR"));
+	prece.appendChild(button)
+	button.addEventListener('click', function(){
+  		document.getElementById("Preču lapa").removeChild(prece);
+	});
+		
+	document.getElementById("Preču lapa").appendChild(prece);
 }
